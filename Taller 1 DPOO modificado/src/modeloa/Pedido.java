@@ -13,6 +13,7 @@ public class Pedido
 	private String nombreCliente;
 	private String direccionCliente;
 	private ArrayList<IProducto> itemsPedido;
+	private int caloriasPedido;
 	
 	public Pedido(String pnombreCliente, String direccion)
 	{
@@ -21,12 +22,14 @@ public class Pedido
 		numeroPedidos += 1;
 		idPedido = numeroPedidos;
 		itemsPedido = new ArrayList<IProducto>();
+		caloriasPedido = 0;
 	}
 	
 	public void agregarProducto(IProducto producto)
 	{
 		itemsPedido.add(producto);
-	}
+		caloriasPedido = getCaloriasPedido() + producto.getCalorias();	
+		}
 	
 	public int getIdPedido()
 	{
@@ -66,13 +69,14 @@ public class Pedido
 				+ "\n"
 				+ "   ID DEL PEDIDO:		" + Integer.toString(this.getIdPedido()) + "\n"
 				+ "   NOMBRE DEL CLIENTE: 		" + nombreCliente + "\n"
-				+ "   DIRECCIÓN DE FACTURACIÓN: 	" + direccionCliente + "\n"
+				+ "   DIRECCIï¿½N DE FACTURACIï¿½N: 	" + direccionCliente + "\n"
 				+ "\n"
 				+ "   PRODUCTOS DE LA ORDEN\n"
 				+ txtProductos + "\n"
 				+ "   VALOR NETO DEL PEDIDO:	 $" + Integer.toString(this.getPrecioNeto()) + "\n"
 				+ "   VALOR DEL IVA DEL PEDIDO:	 $" + Integer.toString(this.getPrecioIva()) + "\n"
-				+ "   VALOR TOTAL DEL PEDIDO:	 $" + Integer.toString(this.getPrecioTotal()) + "\n\n";
+				+ "   VALOR TOTAL DEL PEDIDO:	 $" + Integer.toString(this.getPrecioTotal()) + "\n\n"
+				+ "   CANTIDAD TOTAL DE CALORIAS:	 " + Integer.toString(this.getCaloriasPedido()) + "\n\n\n";
 	}
 	
 	public void guardarFactura() throws IOException
@@ -89,6 +93,10 @@ public class Pedido
 		BufferedWriter writer = new BufferedWriter(new FileWriter("FACTURA#" + Integer.toString(idPedido) + ".txt"));
 		writer.write(this.generarTextoFactura());
 		writer.close();
+	}
+
+	public int getCaloriasPedido() {
+		return caloriasPedido;
 	}
 	
 }

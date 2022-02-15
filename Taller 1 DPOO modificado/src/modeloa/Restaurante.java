@@ -22,12 +22,15 @@ public class Restaurante
 	
 	private ArrayList<Combo> combos;
 	
+	private ArrayList<ProductoAjustado> bebidas;
+	
 	public Restaurante() 
 	{
 		pedidos = new ArrayList<Pedido>();
 		ingredientes = new ArrayList<Ingrediente>();
 		productosMenu = new ArrayList<ProductoAjustado>();
 		combos = new ArrayList<Combo>();
+		bebidas = new ArrayList<ProductoAjustado>();
 		pedidoEnCurso = null;
 	}
 	
@@ -43,6 +46,8 @@ public class Restaurante
 		 cargarMenu();
 		 
 		 cargarCombos();
+		 
+		 cargarBebidas();
 		 
 	}
 	
@@ -64,6 +69,7 @@ public class Restaurante
 		
 	}
 	
+	
 	private void cargarMenu() throws IOException, FileNotFoundException
 	{
 		
@@ -74,7 +80,25 @@ public class Restaurante
 		while(line != null)
 		{
 			String[] productoCosto = line.split(";");
-			productosMenu.add( new ProductoAjustado(productoCosto[0], Integer.parseInt(productoCosto[1])) );
+			productosMenu.add( new ProductoAjustado(productoCosto[0], Integer.parseInt(productoCosto[1]), Integer.parseInt(productoCosto[2])) );
+			line = br.readLine();
+		}
+		System.out.println(message);
+		br.close();
+		
+	}
+	
+	private void cargarBebidas() throws IOException, FileNotFoundException
+	{
+		
+		FileReader file = new FileReader("Data/bebidas.txt");
+		BufferedReader br = new BufferedReader(file);
+		String message = "";
+		String line = br.readLine();
+		while(line != null)
+		{
+			String[] productoCosto = line.split(";");
+			bebidas.add( new ProductoAjustado(productoCosto[0], Integer.parseInt(productoCosto[1]), Integer.parseInt(productoCosto[2]))  );
 			line = br.readLine();
 		}
 		System.out.println(message);
@@ -95,7 +119,6 @@ public class Restaurante
 			String[] comboDescuentoIngredientes = lineacombo.split(";");
 			String nombreCombo = comboDescuentoIngredientes[0];
 			String descuentoCombo = comboDescuentoIngredientes[1];
-		
 			int i = 2;
 			int max = comboDescuentoIngredientes.length;
 			
@@ -141,34 +164,34 @@ public class Restaurante
 		{
 			boolean seguir = true;
 			ProductoAjustado agregar = productosMenu.get(noProducto); 
-			ProductoAjustado producto = new ProductoAjustado(agregar.getNombre(), agregar.getPrecio());
+			ProductoAjustado producto = new ProductoAjustado(agregar.getNombre(), agregar.getPrecio(), agregar.getCalorias());
 			while(seguir)
 			{
-				System.out.println("\n1. Sí");
+				System.out.println("\n1. Sï¿½");
 				System.out.println("2. No");
-				String modificar = input("Quieres hacer una modificación a este producto");
+				String modificar = input("Quieres hacer una modificaciï¿½n a este producto");
 			
 				if(modificar.equals("1"))
 				{
 					System.out.println("\n1. Agregar ingredientes (costo adicional)");
 					System.out.println("2. Eliminar ingredientes");
-					modificar = input("Cómo quieres modificar este producto");
+					modificar = input("Cï¿½mo quieres modificar este producto");
 				
 					if(modificar.equals("1"))
 					{
 						this.mostrarIngredientesConPrecio();
-						String noIngrediente = input("Escoja el número del ingrediente a agregar");
+						String noIngrediente = input("Escoja el nï¿½mero del ingrediente a agregar");
 						Ingrediente ingrediente = ingredientes.get(Integer.parseInt(noIngrediente) - 1);
 						producto.agregarIngrediente(ingrediente);
-						System.out.println("\nSe agregó correctamente el ingrediente\n");
+						System.out.println("\nSe agregï¿½ correctamente el ingrediente\n");
 					}
 					else
 					{
 						this.mostrarIngredientesSinPrecio();
-						String noIngrediente = input("Escoja el número del ingrediente a eliminar");
+						String noIngrediente = input("Escoja el nï¿½mero del ingrediente a eliminar");
 						Ingrediente ingrediente = ingredientes.get(Integer.parseInt(noIngrediente));
 						producto.eliminarIngrediente(ingrediente);
-						System.out.println("\nSe eliminó correctamente el ingrediente\n");
+						System.out.println("\nSe eliminï¿½ correctamente el ingrediente\n");
 					}
 				}
 				else
@@ -181,9 +204,26 @@ public class Restaurante
 		}
 	}
 	
+	public IProducto hallarBebida(int noProducto)
+	{
+		if(bebidas.size() <= noProducto)
+		{
+			noProducto -= bebidas.size();
+			return combos.get(noProducto);
+		}
+		
+		else
+		{
+			
+			ProductoAjustado agregar = bebidas.get(noProducto); 
+			ProductoAjustado producto = new ProductoAjustado(agregar.getNombre(), agregar.getPrecio(), agregar.getCalorias());
+			return producto;
+		}
+	}
+	
 	public void mostrarProductos()
 	{
-		System.out.println("\nPRODUCTOS DEL MENÚ\n");
+		System.out.println("\nPRODUCTOS DEL MENï¿½\n");
 		
 		int i = 0;
 		for(ProductoAjustado producto: productosMenu)
@@ -202,9 +242,22 @@ public class Restaurante
 		
 	}
 	
+	public void mostrarBebidas()
+	{
+		System.out.println("\nBebidas DEL MENï¿½\n");
+		
+		int i = 0;
+		for(ProductoAjustado bebida: bebidas)
+		{
+			i += 1;
+			System.out.println(Integer.toString(i) + ". " + bebida.getNombre() + "     $" + Integer.toString(bebida.getPrecio()) );
+		}
+		
+		
+	}
 	public void mostrarIngredientesConPrecio()
 	{
-		System.out.println("\nINGREDIENTES DEL MENÚ\n");
+		System.out.println("\nINGREDIENTES DEL MENï¿½\n");
 		
 		int i = 0;
 		for(Ingrediente ingrediente: ingredientes)
@@ -216,7 +269,7 @@ public class Restaurante
 	
 	public void mostrarIngredientesSinPrecio()
 	{
-		System.out.println("\nINGREDIENTES DEL MENÚ\n");
+		System.out.println("\nINGREDIENTES DEL MENï¿½\n");
 		
 		int i = 0;
 		for(Ingrediente ingrediente: ingredientes)
@@ -254,7 +307,7 @@ public class Restaurante
 		
 		if(pedidoBuscado == null)
 		{
-			System.out.println("\nNo se encontró un pedido con ese código ID\n");
+			System.out.println("\nNo se encontrï¿½ un pedido con ese cï¿½digo ID\n");
 		}
 		
 		else

@@ -9,13 +9,15 @@ public class ProductoAjustado implements IProducto
 	private ArrayList<Ingrediente> eliminados;
 	private int precioInicial;
 	private String nombre;
-
-	public ProductoAjustado( String pnombre, int precioBase)
+	private int calorias;
+	
+	public ProductoAjustado( String pnombre, int precioBase, int calorias)
 	{
 		nombre = pnombre;
 		agregados = new ArrayList<Ingrediente>();
 		eliminados = new ArrayList<Ingrediente>();
 		precioInicial = precioBase;
+		this.calorias = calorias;
 	}
 	
 	public void agregarIngrediente(Ingrediente ingrediente)
@@ -51,10 +53,16 @@ public class ProductoAjustado implements IProducto
 		}
 		return nombre + nombreAdicional;
 	}
-
+	
+	public int getCalorias()
+	{
+		return calorias;
+	}
 	public String generarTextoFactura() 
 	{
-		return ("   " + this.getNombre() + ": 		$" + Integer.toString(this.getPrecio()) + "\n");
+		int calordias = this.getCalorias();
+		String mensaje = "   " + this.getNombre() + ": 		$" + Integer.toString(this.getPrecio()) + "      Calorias 	:" + Integer.toString(calordias) + "\n";
+		return (mensaje);
 	}
 	
 }

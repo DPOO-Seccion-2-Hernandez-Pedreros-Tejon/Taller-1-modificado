@@ -7,4 +7,6 @@ public interface IProducto
 	public String getNombre();
 	
 	public String generarTextoFactura(); 
+	
+	public int getCalorias();
 }

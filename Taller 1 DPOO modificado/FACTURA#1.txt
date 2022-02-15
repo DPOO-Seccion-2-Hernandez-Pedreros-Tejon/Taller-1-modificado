@@ -1,0 +1,18 @@
+	HAMBURGUESAS & HAMBURGUESAS
+
+   ID DEL PEDIDO:		1
+   NOMBRE DEL CLIENTE: 		ff
+   DIRECCI�N DE FACTURACI�N: 	ff
+
+   PRODUCTOS DE LA ORDEN
+   combo corral: 		$17550      Calorias 	:390
+   papas en casco grandes: 		$6900      Calorias 	:130
+   gaseosa: 		$5000      Calorias 	:38
+
+   VALOR NETO DEL PEDIDO:	 $29450
+   VALOR DEL IVA DEL PEDIDO:	 $5595
+   VALOR TOTAL DEL PEDIDO:	 $35045
+
+   CANTIDAD TOTAL DE CALORIAS:	 $558
+
+
