@@ -101,7 +101,7 @@ public class Pedido
 		return caloriasPedido;
 	}
 	
-	public boolean equals (Pedido pedido)
+	public boolean equals(Pedido pedido)
 	{
 		ArrayList<IProducto> items1 = this.getItemsPedido();
 		ArrayList<IProducto> items2 = pedido.getItemsPedido();

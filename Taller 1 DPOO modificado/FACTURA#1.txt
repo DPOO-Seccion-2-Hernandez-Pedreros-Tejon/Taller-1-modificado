@@ -1,18 +1,16 @@
 	HAMBURGUESAS & HAMBURGUESAS
 
    ID DEL PEDIDO:		1
-   NOMBRE DEL CLIENTE: 		Mariapaz Baquero
-   DIRECCI�N DE FACTURACI�N: 	Venezuela
+   NOMBRE DEL CLIENTE: 		wewe
+   DIRECCI�N DE FACTURACI�N: 	3
 
    PRODUCTOS DE LA ORDEN
-   papas en casco medianas: 		$5500      Calorias 	:100
-   agua cristal sin gas: 		$5000      Calorias 	:0
-   wrap de lomo sin tocineta picada: 		$22000      Calorias 	:164
+   corral con lechuga sin tomate: 		$15000      Calorias 	:270
 
-   VALOR NETO DEL PEDIDO:	 $32500
-   VALOR DEL IVA DEL PEDIDO:	 $6175
-   VALOR TOTAL DEL PEDIDO:	 $38675
+   VALOR NETO DEL PEDIDO:	 $15000
+   VALOR DEL IVA DEL PEDIDO:	 $2850
+   VALOR TOTAL DEL PEDIDO:	 $17850
 
-   CANTIDAD TOTAL DE CALORIAS:	 264
+   CANTIDAD TOTAL DE CALORIAS:	 270
 
 

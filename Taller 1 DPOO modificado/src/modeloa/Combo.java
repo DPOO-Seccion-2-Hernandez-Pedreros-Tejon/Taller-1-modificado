@@ -38,5 +38,10 @@ public class Combo implements IProducto
 		int calordias = this.getCalorias();
 		return ("   " + nombreCombo + ": 		$" + Integer.toString(this.getPrecio()) + "      Calorias 	:" + Integer.toString(calordias) + "\n");
 	}
+	
+	public boolean equals(IProducto combo)
+	{
+		return (this.getNombre() == combo.getNombre());
+	}
 
 }

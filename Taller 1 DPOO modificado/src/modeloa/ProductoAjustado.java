@@ -67,7 +67,7 @@ public class ProductoAjustado implements IProducto
 	
 	public boolean equals(IProducto producto)
 	{
-		if (this.getNombre() == producto.getNombre()) 
+		if (this.getNombre().equals(producto.getNombre())) 
 		{
 			return true;
 		}

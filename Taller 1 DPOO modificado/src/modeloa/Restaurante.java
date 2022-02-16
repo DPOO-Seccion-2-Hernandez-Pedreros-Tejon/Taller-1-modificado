@@ -167,31 +167,33 @@ public class Restaurante
 			ProductoAjustado producto = new ProductoAjustado(agregar.getNombre(), agregar.getPrecio(), agregar.getCalorias());
 			while(seguir)
 			{
-				System.out.println("\n1. S�");
+				System.out.println("Quieres hacer una modificación a este producto");
+				System.out.println("\n1. Sí");
 				System.out.println("2. No");
-				String modificar = input("Quieres hacer una modificaci�n a este producto");
+				String modificar = input("Seleccione una opción: ");
 			
 				if(modificar.equals("1"))
 				{
+					System.out.println("Cómo quieres modificar este producto");
 					System.out.println("\n1. Agregar ingredientes (costo adicional)");
 					System.out.println("2. Eliminar ingredientes");
-					modificar = input("C�mo quieres modificar este producto");
+					modificar = input("Seleccione una opción: ");
 				
 					if(modificar.equals("1"))
 					{
 						this.mostrarIngredientesConPrecio();
-						String noIngrediente = input("Escoja el n�mero del ingrediente a agregar");
+						String noIngrediente = input("Escoja el número del ingrediente a agregar");
 						Ingrediente ingrediente = ingredientes.get(Integer.parseInt(noIngrediente) - 1);
 						producto.agregarIngrediente(ingrediente);
-						System.out.println("\nSe agreg� correctamente el ingrediente\n");
+						System.out.println("\nSe agregó correctamente el ingrediente\n");
 					}
 					else
 					{
 						this.mostrarIngredientesSinPrecio();
-						String noIngrediente = input("Escoja el n�mero del ingrediente a eliminar");
-						Ingrediente ingrediente = ingredientes.get(Integer.parseInt(noIngrediente));
+						String noIngrediente = input("Escoja el número del ingrediente a eliminar");
+						Ingrediente ingrediente = ingredientes.get(Integer.parseInt(noIngrediente) - 1);
 						producto.eliminarIngrediente(ingrediente);
-						System.out.println("\nSe elimin� correctamente el ingrediente\n");
+						System.out.println("\nSe eliminó correctamente el ingrediente\n");
 					}
 				}
 				else
@@ -240,7 +242,7 @@ public class Restaurante
 			System.out.println(Integer.toString(i) + ". " + combo.getNombre() + "     $" + Integer.toString(combo.getPrecio()) );
 		}
 		
-		System.out.println("\nBebbidas\n");
+		System.out.println("\nBebidas\n");
 		
 		for(ProductoAjustado bebida: bebidas)
 		{
@@ -293,10 +295,21 @@ public class Restaurante
 			System.out.println("\nTiene que tener un pedido en curso para agregar productos\n");
 			return;
 		}
+		
+		for (Pedido pedidosP: pedidos)
+		{
+			if (pedidosP.equals(pedidoEnCurso))
+			{
+				int id = pedidosP.getIdPedido();
+				System.out.println( "\n El pedido antiguo con id " + Integer.toString(id) 
+				+ " es idéntico al pedido actual.\n");
+			}
+		}
+		
 		pedidos.add(pedidoEnCurso);
 		pedidoEnCurso.guardarFactura();
-		pedidoEnCurso = null;
 		System.out.println("\nSe ha guardado la factura y se ha cerrado el pedido\n");
+		pedidoEnCurso = null;
 	}
 	
 	public void buscarPedido(int id)
