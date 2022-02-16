@@ -65,4 +65,12 @@ public class ProductoAjustado implements IProducto
 		return (mensaje);
 	}
 	
+	public boolean equals(IProducto producto)
+	{
+		if (this.getNombre() == producto.getNombre()) 
+		{
+			return true;
+		}
+		else return false;
+	}
 }

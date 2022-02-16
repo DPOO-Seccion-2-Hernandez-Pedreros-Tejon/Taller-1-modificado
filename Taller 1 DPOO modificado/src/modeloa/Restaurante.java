@@ -240,6 +240,13 @@ public class Restaurante
 			System.out.println(Integer.toString(i) + ". " + combo.getNombre() + "     $" + Integer.toString(combo.getPrecio()) );
 		}
 		
+		System.out.println("\nBebbidas\n");
+		
+		for(ProductoAjustado bebida: bebidas)
+		{
+			i += 1;
+			System.out.println(Integer.toString(i) + ". " + bebida.getNombre() + "     $" + Integer.toString(bebida.getPrecio()) );
+		}
 	}
 	
 	public void mostrarBebidas()

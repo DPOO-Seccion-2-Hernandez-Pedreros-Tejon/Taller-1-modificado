@@ -27,7 +27,7 @@ public class Pedido
 	
 	public void agregarProducto(IProducto producto)
 	{
-		itemsPedido.add(producto);
+		getItemsPedido().add(producto);
 		caloriasPedido = getCaloriasPedido() + producto.getCalorias();	
 		}
 	
@@ -36,10 +36,11 @@ public class Pedido
 		return idPedido;
 	}
 	
+
 	private int getPrecioNeto()
 	{
 		int precio = 0;
-		for(IProducto producto: itemsPedido)
+		for(IProducto producto: getItemsPedido())
 		{
 			precio += producto.getPrecio();
 		}
@@ -60,7 +61,7 @@ public class Pedido
 	{
 		String txtProductos = "";
 		
-		for(IProducto producto: itemsPedido)
+		for(IProducto producto: getItemsPedido())
 		{
 			txtProductos += producto.generarTextoFactura();
 		}
@@ -95,8 +96,34 @@ public class Pedido
 		writer.close();
 	}
 
-	public int getCaloriasPedido() {
+	public int getCaloriasPedido() 
+	{
 		return caloriasPedido;
 	}
+	
+	public boolean equals (Pedido pedido)
+	{
+		ArrayList<IProducto> items1 = this.getItemsPedido();
+		ArrayList<IProducto> items2 = pedido.getItemsPedido();
+		boolean iguales = true;
+		for (IProducto item1: items1)
+		{
+			for (IProducto item2: items2)
+			{
+				if (!item1.equals(item2))
+				{
+					iguales = false;
+					break;
+				}
+			}
+		}
+		
+		return iguales;
+	}
+
+	public ArrayList<IProducto> getItemsPedido() {
+		return itemsPedido;
+	}
+	
 	
 }
